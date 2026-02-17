@@ -1,16 +1,27 @@
 import type { PageServerLoad } from './$types';
-import { EventService } from '$lib/services/event-service';
-
-const eventService = new EventService();
+import { API_BASE_URL } from '$env/static/private';
+import type { EventInfo } from '$lib/models/event-info.model';
 
 export const load: PageServerLoad = async ({ params, locals, fetch }) => {
   const lang = params.lang;
 
-  if (locals.prefetchedEvent) {
-    return { event: locals.prefetchedEvent };
+  const eventsResponse = await fetch(`${API_BASE_URL}/events`, {
+    headers: {
+      'x-language': lang
+    }
+  })
+  const events: EventInfo[] = await eventsResponse.json();
+
+  if (locals.upcomingEvent && params.slug === locals.upcomingEvent.slug) {
+    return { event: locals.upcomingEvent, events: events };
   }
 
-  const event = await eventService.getUpcomingEvent(fetch, lang);
+  const eventResponse = await fetch(`${API_BASE_URL}/events/${params.slug}`, {
+    headers: {
+      'x-language': lang
+    }
+  });
+  const event = await eventResponse.json();
 
-  return { event };
+  return { event, events };
 };
