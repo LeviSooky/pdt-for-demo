@@ -3,6 +3,7 @@ export interface EventRegistration {
     firstName: string,
     lastName: string,
     company: string,
-    email: string
-    phone?: string
+    email: string,
+    phone?: string,
+    cityId: number
 }

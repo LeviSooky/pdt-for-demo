@@ -3,6 +3,8 @@
     import { locale, t } from "$lib/i18n/i18n";
     import type { EventRegistration } from "$lib/models/event-registration.model";
     import { get } from "svelte/store";
+    import CityAutocomplete from "./CityAutocomplete.svelte";
+    import type { City } from "$lib/models/city.model";
 
     export let eventId: number;
 
@@ -18,6 +20,7 @@
         email: "",
         phone: "",
         company: "",
+        city: null,
     };
     function validateForm(): boolean {
         errors = {};
@@ -47,10 +50,14 @@
             errors.phone = $t("registration.errors.phone");
         }
 
+        if (!formData.city || !formData.city.id) {
+            errors.city = $t("registration.errors.city");
+        }
+
         return Object.keys(errors).length === 0;
     }
 
-async function handleSubmit(event: Event) {
+    async function handleSubmit(event: Event) {
         event.preventDefault();
 
         generalError = "";
@@ -67,6 +74,7 @@ async function handleSubmit(event: Event) {
             company: formData.company,
             email: formData.email,
             phone: formData.phone,
+            cityId: formData.city?.id,
         };
         try {
             const response = await fetch(
@@ -96,6 +104,7 @@ async function handleSubmit(event: Event) {
                 company: "",
                 email: "",
                 phone: "",
+                city: null,
             };
         } catch (err) {
             console.error("Registration error:", err);
@@ -108,13 +117,17 @@ async function handleSubmit(event: Event) {
         }
     }
 
+    function handleCitySelect(city: City) {
+        formData.city = city;
+        clearError("city");
+    }
+
     function clearError(field: string) {
         if (errors[field]) {
             delete errors[field];
             errors = errors; // Trigger reactivity
         }
     }
-
 </script>
 
 <section id="eventRegistration" class="event-registration">
@@ -224,7 +237,11 @@ async function handleSubmit(event: Event) {
                                 <span class="error-text">{errors.email}</span>
                             {/if}
                         </div>
-
+                        <CityAutocomplete
+                            bind:value={formData.city}
+                            error={errors.city || ""}
+                            onSelect={handleCitySelect}
+                        />
                         <div class="form-group">
                             <label for="phone"
                                 >{$t("registration.fields.phone")}</label

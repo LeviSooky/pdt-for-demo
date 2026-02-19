@@ -21,7 +21,8 @@ export const translations = {
                 firstName: 'Keresztnév',
                 company: 'Cég',
                 email: 'E-mail',
-                phone: 'Telefon'
+                phone: 'Telefon',
+                city: "Város"
             },
             disclaimer: 'A regisztrációval hozzájárulsz ahhoz, hogy az eseményről kapcsolódási és marketing célú kommunikációt küldjünk számodra. A létrehozásról bármikor leiratkozhatsz.',
             submit: 'Beküldés',
@@ -35,6 +36,7 @@ export const translations = {
                 company: 'A cég neve legalább 2 karakter kell legyen',
                 email: 'Kérjük, adjon meg egy érvényes email címet',
                 phone: 'Kérjük, adjon meg egy érvényes telefonszámot',
+                city: "Kérjük, válasszon várost",
                 general: 'Hiba történt. Kérjük, próbálja újra.'
             }
         },
@@ -81,7 +83,8 @@ export const translations = {
                 firstName: 'First Name',
                 company: 'Company',
                 email: 'E-mail',
-                phone: 'Phone'
+                phone: 'Phone',
+                city: "City"
             },
             disclaimer: 'By registering, you agree to receive event-related and marketing communications from us. You can unsubscribe at any time.',
             submit: 'Submit',
@@ -95,6 +98,7 @@ export const translations = {
                 company: 'Company name must be at least 2 characters',
                 email: 'Please enter a valid email address',
                 phone: 'Please enter a valid phone number',
+                city: 'Please choose a city',
                 general: 'An error occurred. Please try again.'
             }
         },
