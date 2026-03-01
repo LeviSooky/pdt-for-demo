@@ -3,33 +3,39 @@
     import NavBar from "$lib/components/NavBar.svelte";
     import Registration from "$lib/components/Registration.svelte";
     import { page } from "$app/state";
+    import defaultSpeakerLogo from "$lib/assets/ergomania-logo-colored-on-dark-big.svg";
 
     export let data;
 
     function formatDate(date) {
         if (!date) return "";
         const d = new Date(date);
-        return d.toLocaleDateString(page.params.lang === "hu" ? "hu-HU" : "en-US", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-        });
+        return d.toLocaleDateString(
+            page.params.lang === "hu" ? "hu-HU" : "en-US",
+            {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            },
+        );
     }
 
     function formatTime(date) {
         if (!date) return "";
         const d = new Date(date);
-        return d.toLocaleTimeString(page.params.lang === "hu" ? "hu-HU" : "en-US", {
-            hour: "2-digit",
-            minute: "2-digit",
-        });
+        return d.toLocaleTimeString(
+            page.params.lang === "hu" ? "hu-HU" : "en-US",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+            },
+        );
     }
 
     function formatDateTime(date) {
         if (!date) return "";
         return `${formatDate(date)}, ${formatTime(date)}`;
     }
-
 </script>
 
 <svelte:head>
@@ -151,11 +157,24 @@
 
                             <h4>
                                 {#each program.speakers as speaker, i}
-                                    <b>{speaker.name}</b>{#if speaker.description}
-                                        &nbsp;-  {speaker.description}{/if}{#if i < program.speakers.length - 1}<br
-                                        />{/if}
+                                    <b>{speaker.name}</b
+                                    >{#if speaker.description}
+                                        &nbsp;- {speaker.description}
+                                    {/if}
+                                    {#if i < program.speakers.length - 1}
+                                        <br />
+                                    {/if}
                                 {/each}
                             </h4>
+                        {:else}
+                            <div class="speakers">
+                                <div class="speaker default-speaker">
+                                    <img
+                                        src={defaultSpeakerLogo}
+                                        alt="Ergománia"
+                                    />
+                                </div>
+                            </div>
                         {/if}
 
                         {#if program.content}
@@ -168,6 +187,6 @@
     </section>
 {/if}
 
-<Registration eventId={data.event.id}/>
+<Registration eventId={data.event.id} />
 
- <Footer />
+<Footer />

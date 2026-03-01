@@ -571,6 +571,28 @@ a {
     color: #FF7A59;
 }
 
+.default-speaker {
+    background: linear-gradient(135deg, #FF7A59 0%, #ff9a7a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 20px rgba(255, 122, 89, 0.25);
+    transition: all 0.3s ease;
+}
+
+.default-speaker:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 122, 89, 0.35);
+}
+
+.default-speaker img {
+    height: 80px;
+    min-width: 75px;
+    filter: brightness(0) invert(1);
+}
+
 /* Responsive Design */
 @media (min-width: 769px) {
     .hero-content {
