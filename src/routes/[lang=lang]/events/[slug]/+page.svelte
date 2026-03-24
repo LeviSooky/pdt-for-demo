@@ -84,7 +84,7 @@
             <h3><strong>{data.event.subtitle}</strong></h3>
         {/if}
         {#if data.event.description}
-            {data.event.description}
+            {@html data.event.description}
         {/if}
     </div>
 </section>
@@ -107,10 +107,10 @@
     <section id="program" class="section-content program-section">
         <div class="container">
             {#if data.event.header}
-                <h2>{data.event.header}</h2>
+                <h2>{@html data.event.header}</h2>
             {/if}
             {#if data.event.subHeader}
-                <h3>{data.event.subHeader}</h3>
+                <h3>{@html data.event.subHeader}</h3>
             {/if}
         </div>
     </section>
