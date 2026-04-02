@@ -103,7 +103,6 @@
 {/if}
 
 <!-- Program Section -->
-{#if data.event.programs && data.event.programs.length > 0}
     <section id="program" class="section-content program-section">
         <div class="container">
             {#if data.event.header}
@@ -116,6 +115,7 @@
     </section>
 
     <!-- Timeline/Schedule Section -->
+{#if data.event.programs && data.event.programs.length > 0}
     <section class="timeline">
         <div class="container">
             {#each data.event.programs as program}
